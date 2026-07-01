@@ -1,5 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from . import models, database
+
+models.Base.metadata.create_all(bind=database.engine)
 
 app = FastAPI(
     title="KAIROS API",
