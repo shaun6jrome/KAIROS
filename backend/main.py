@@ -19,8 +19,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-from .routers import baseline
+from .routers import baseline, drift
 app.include_router(baseline.router)
+app.include_router(drift.router)
 
 @app.get("/")
 def health_check():
