@@ -1,5 +1,6 @@
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
+from scipy.stats import entropy
 
 def calculate_cosine_drift(centroid: list[float], response_embedding: list[float]) -> float:
     """
@@ -36,3 +37,21 @@ def calculate_length_zscore(response_text: str, mean_length: float, std_length: 
     z_score = abs(length - mean_length) / std_length
     
     return float(z_score)
+
+def calculate_kl_divergence(baseline_dist: list[float], current_dist: list[float]) -> float:
+    """
+    Calculate the KL divergence between two probability distributions (e.g. response lengths).
+    Returns a float representing the divergence. Higher = more drifted.
+    """
+    # Add a small epsilon to avoid log(0) or division by zero
+    epsilon = 1e-10
+    
+    p = np.array(baseline_dist) + epsilon
+    q = np.array(current_dist) + epsilon
+    
+    # Normalize to create valid probability distributions
+    p = p / np.sum(p)
+    q = q / np.sum(q)
+    
+    kl_div = entropy(p, q)
+    return float(kl_div)
