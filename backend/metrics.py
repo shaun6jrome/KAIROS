@@ -55,3 +55,29 @@ def calculate_kl_divergence(baseline_dist: list[float], current_dist: list[float
     
     kl_div = entropy(p, q)
     return float(kl_div)
+
+def calculate_aggregate_drift_score(cosine_drift: float, length_zscore: float, kl_div: float = 0.0) -> float:
+    """
+    Combine metrics into an aggregate drift score.
+    Weights can be tuned based on what's most important.
+    """
+    # Simple weighted sum for now
+    # We cap length_zscore so a massive length difference doesn't completely overwhelm semantic drift
+    capped_zscore = min(length_zscore, 5.0) 
+    
+    score = (cosine_drift * 0.6) + (capped_zscore * 0.1) + (kl_div * 0.3)
+    return float(score)
+
+def classify_drift_severity(drift_score: float) -> str:
+    """
+    Classify the severity of the drift based on the aggregate score.
+    """
+    if drift_score < 0.3:
+        return "NOMINAL"
+    elif drift_score < 0.6:
+        return "WATCH"
+    elif drift_score < 1.0:
+        return "ALERT"
+    else:
+        return "CRITICAL"
+
