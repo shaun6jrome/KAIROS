@@ -32,9 +32,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-from .routers import baseline, drift
+from .routers import baseline, drift, dashboard
+
 app.include_router(baseline.router)
 app.include_router(drift.router)
+app.include_router(dashboard.router)
 
 @app.get("/")
 def health_check():
