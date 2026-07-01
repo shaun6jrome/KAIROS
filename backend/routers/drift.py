@@ -52,8 +52,14 @@ def analyze_response(request: AnalyzeRequest, db: Session = Depends(database.get
             drift_score=aggregate_score
         )
         db.add(drift_event)
+        db.commit() # Commit so we get the drift_event.id
+        db.refresh(drift_event)
         
-    db.commit()
+        # Trigger alert
+        from .. import alerts
+        alerts.trigger_alert(db, drift_event)
+    else:
+        db.commit()
     
     return {
         "drift_score": aggregate_score,
