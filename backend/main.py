@@ -19,6 +19,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from .routers import baseline
+app.include_router(baseline.router)
+
 @app.get("/")
 def health_check():
     return {"status": "ok", "service": "kairos"}
