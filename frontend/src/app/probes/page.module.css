@@ -1,0 +1,29 @@
+.header {
+  margin: 3rem 0 2rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.chartSection {
+  width: 100%;
+}
+
+.tableSection {
+  width: 100%;
+}
