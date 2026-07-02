@@ -1,8 +1,8 @@
 import os
 from sqlalchemy.orm import Session
-from . import database, models, probes
+import database, models, probes
 import google.generativeai as genai
-from .embeddings import get_embeddings
+from embeddings import get_embeddings
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 

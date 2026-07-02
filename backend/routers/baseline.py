@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from pydantic import BaseModel
 import numpy as np
 
-from .. import models, database, embeddings
+import models, database, embeddings
 
 router = APIRouter(prefix="/baselines", tags=["baselines"])
 

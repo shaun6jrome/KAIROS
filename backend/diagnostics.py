@@ -1,6 +1,6 @@
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
-from . import embeddings
+import embeddings
 
 def check_input_drift(recent_queries: list[str], baseline_queries: list[str], threshold: float = 0.2) -> tuple[bool, float, str]:
     """

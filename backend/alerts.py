@@ -1,6 +1,6 @@
 import requests
 from sqlalchemy.orm import Session
-from . import models
+import models
 import os
 
 def trigger_alert(db: Session, drift_event: models.DriftEvent):

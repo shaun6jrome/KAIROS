@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from apscheduler.schedulers.background import BackgroundScheduler
 import contextlib
-from . import models, database, runner
+import models, database, runner
 
 models.Base.metadata.create_all(bind=database.engine)
 
@@ -32,7 +32,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-from .routers import baseline, drift, dashboard
+from routers import baseline, drift, dashboard
 
 app.include_router(baseline.router)
 app.include_router(drift.router)

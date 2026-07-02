@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from pydantic import BaseModel
 import numpy as np
 
-from .. import models, database, embeddings, metrics
+import models, database, embeddings, metrics
 
 router = APIRouter(prefix="/analyze", tags=["drift"])
 
@@ -56,7 +56,7 @@ def analyze_response(request: AnalyzeRequest, db: Session = Depends(database.get
         db.refresh(drift_event)
         
         # Trigger alert
-        from .. import alerts
+        import alerts
         alerts.trigger_alert(db, drift_event)
     else:
         db.commit()
