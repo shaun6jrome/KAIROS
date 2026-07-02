@@ -1,0 +1,47 @@
+.header {
+  margin: 3rem 0 2rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1.5rem;
+  height: 600px;
+  margin-bottom: 3rem;
+}
+
+.timelineCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.detailCol {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  
+  .timelineCol {
+    height: 400px;
+  }
+  
+  .detailCol {
+    height: 600px;
+  }
+}
