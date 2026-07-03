@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
+
+const outfit = Outfit({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "KAIROS - AI Behavioral Monitoring",
@@ -14,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={outfit.className} suppressHydrationWarning>
         <Navigation />
         <main>{children}</main>
       </body>

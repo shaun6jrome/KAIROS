@@ -17,30 +17,32 @@ export default function Home() {
   } | null>(null);
 
   useEffect(() => {
-    // In a real app, these would be fetched from the FastAPI backend.
-    // We mock the data here for the UI demo based on the requirements.
-    const mockData = {
-      overview: { status: 'WATCH', active_alerts: 2 },
-      driftHistory: Array.from({ length: 24 }).map((_, i) => ({
-        id: i,
-        timestamp: new Date(Date.now() - i * 3600000).toISOString(),
-        severity: Math.random() > 0.8 ? 'ALERT' : 'NOMINAL',
-        drift_score: Math.random() * 0.4 + 0.1
-      })),
-      alerts: [
-        { id: 1, timestamp: new Date(Date.now() - 3600000).toISOString(), message: '[WATCH] Model hallucination rate increased', is_resolved: false },
-        { id: 2, timestamp: new Date(Date.now() - 7200000).toISOString(), message: '[ALERT] Cosine similarity drift detected', is_resolved: false }
-      ],
-      probeSummary: [
-        { category: 'hallucination', score: 0.85 },
-        { category: 'sycophancy', score: 0.92 },
-        { category: 'consistency', score: 0.78 },
-        { category: 'refusal_drift', score: 0.95 },
-        { category: 'factual', score: 0.88 }
-      ]
-    };
+    async function fetchData() {
+      try {
+        const [overviewRes, driftRes, alertsRes, probeRes] = await Promise.all([
+          fetch('http://localhost:8000/dashboard/overview'),
+          fetch('http://localhost:8000/dashboard/drift-history'),
+          fetch('http://localhost:8000/dashboard/alerts'),
+          fetch('http://localhost:8000/dashboard/probe-summary')
+        ]);
+
+        const overview = await overviewRes.json();
+        const driftHistory = await driftRes.json();
+        const alerts = await alertsRes.json();
+        const probeSummary = await probeRes.json();
+
+        setData({
+          overview,
+          driftHistory: driftHistory.reverse(), // Show chronologically
+          alerts,
+          probeSummary
+        });
+      } catch (error) {
+        console.error('Failed to fetch dashboard data:', error);
+      }
+    }
     
-    setData(mockData);
+    fetchData();
   }, []);
 
   if (!data) return null;
