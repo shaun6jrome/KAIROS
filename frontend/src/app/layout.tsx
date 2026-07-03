@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { Outfit } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 
-const outfit = Outfit({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair", display: "swap" });
 
 export const metadata: Metadata = {
   title: "KAIROS - AI Behavioral Monitoring",
@@ -17,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={outfit.className} suppressHydrationWarning>
+      <body className={`${inter.variable} ${playfair.variable}`} suppressHydrationWarning>
         <Navigation />
         <main>{children}</main>
       </body>
