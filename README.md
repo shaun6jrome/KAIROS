@@ -78,7 +78,10 @@ def generate_response(prompt: str) -> str:
 
 ## 📊 Dashboard Features
 
-The KAIROS Next.js frontend is built with a sleek "Dark Cinematic" glassmorphism aesthetic, offering real-time insights into your fleet.
+The KAIROS Next.js frontend is built with a highly aesthetic **"Dark Cinematic" Glassmorphism** design, featuring:
+*   Vibrant, high-resolution mesh gradients with authentic printed film grain overlays.
+*   Classy typography pairings (Playfair Display for headers, tightly tracked Inter for body text).
+*   Real-time monitoring telemetry that feels like a mission control interface.
 
 ### 1. Behavioral Analysis
 Track Cosine Similarity drift against the semantic centroid, verbosity distribution histograms, and KL Divergence for tone mapping.
@@ -91,15 +94,26 @@ An event timeline of `ALERT` and `CRITICAL` drift anomalies, paired with AI-gene
 
 ---
 
-## 🛠️ Local Development
+## 🛠️ Deployment & Local Development
 
 KAIROS is structured as a monorepo containing a Python FastAPI backend and a Next.js React frontend.
 
-### Prerequisites
+### 🐳 Quick Start (Docker)
+The easiest way to spin up the entire KAIROS platform (Frontend + Backend + DB) is using Docker Compose.
+
+```bash
+# Build and run production-ready containers
+docker compose up --build
+```
+Navigate to `http://localhost:3000` to view the dashboard!
+
+### 💻 Manual Local Development
+
+**Prerequisites**
 - Python 3.10+
 - Node.js 18+
 
-### Backend Setup
+**Backend Setup**
 ```bash
 cd backend
 python3 -m venv venv
@@ -108,13 +122,12 @@ pip install -r requirements.txt
 uvicorn main:app --reload --port 8000
 ```
 
-### Frontend Setup
+**Frontend Setup**
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
-Navigate to `http://localhost:3000` to view the dashboard.
 
 ---
 
