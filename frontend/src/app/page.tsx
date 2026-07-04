@@ -20,10 +20,10 @@ export default function Home() {
     async function fetchData() {
       try {
         const [overviewRes, driftRes, alertsRes, probeRes] = await Promise.all([
-          fetch('http://localhost:8000/dashboard/overview'),
-          fetch('http://localhost:8000/dashboard/drift-history'),
-          fetch('http://localhost:8000/dashboard/alerts'),
-          fetch('http://localhost:8000/dashboard/probe-summary')
+          fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/dashboard/overview`),
+          fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/dashboard/drift-history`),
+          fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/dashboard/alerts`),
+          fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/dashboard/probe-summary`)
         ]);
 
         const overview = await overviewRes.json();
