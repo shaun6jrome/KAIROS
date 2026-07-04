@@ -41,32 +41,60 @@ body {
 h1, h2, h3 {
   font-family: var(--font-playfair), serif;
   font-weight: 700;
-  color: #ffffff;
-  letter-spacing: 0.01em;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3), 0 0 20px rgba(255, 255, 255, 0.1); /* Softer, elegant cinematic glow */
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5em;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6), 0 0 15px rgba(255, 255, 255, 0.3); /* Harsh Cinematic Glow */
 }
 
 h4, h5, h6 {
   font-family: var(--font-inter), sans-serif;
-  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.15em; /* Cinematic wide tracking for subheaders */
-  color: var(--text-secondary);
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
 }
 
 a {
   color: inherit;
   text-decoration: none;
+  transition: opacity 0.2s, text-shadow 0.2s;
 }
 
-/* Glass Panel Utility */
+a:hover {
+  opacity: 0.8;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+}
+
+/* Glass panel utility class */
 .glass-panel {
   background: var(--glass-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--glass-border);
-  border-radius: 12px;
-  box-shadow: 0 4px 24px -1px var(--glass-glow);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px var(--glass-glow);
+  border-radius: 16px;
+}
+
+/* Harsh Glow for Recharts Graphs */
+.recharts-wrapper {
+  /* Make the SVG itself overflow visible so the shadow isn't clipped */
+  overflow: visible !important;
+}
+
+.recharts-surface {
+  overflow: visible !important;
+}
+
+.recharts-line-curve {
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.5)) drop-shadow(0 0 12px rgba(255, 255, 255, 0.3));
+}
+
+.recharts-area-area {
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
+}
+
+.recharts-bar-rectangle {
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.4));
 }
 
 /* Layout Utilities */
