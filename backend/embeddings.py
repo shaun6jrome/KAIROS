@@ -1,22 +1,30 @@
-from sentence_transformers import SentenceTransformer
-import numpy as np
+import os
+import google.generativeai as genai
 
-# Load model globally so it's only loaded once on startup
-model = SentenceTransformer('all-MiniLM-L6-v2')
+genai.configure(api_key=os.environ.get("GEMINI_API_KEY", ""))
 
 def get_embedding(text: str) -> list[float]:
     """
-    Generate an embedding for a given text.
+    Generate an embedding for a given text using Gemini API.
     Returns a list of floats representing the embedding vector.
     """
-    # The model outputs a numpy array, we convert it to a list for JSON serialization
-    embedding = model.encode(text)
-    return embedding.tolist()
+    if not text:
+        return []
+    result = genai.embed_content(
+        model="models/text-embedding-004",
+        content=text
+    )
+    return result['embedding']
 
 def get_embeddings(texts: list[str]) -> list[list[float]]:
     """
-    Generate embeddings for a list of texts.
+    Generate embeddings for a list of texts using Gemini API.
     Returns a list of lists of floats.
     """
-    embeddings = model.encode(texts)
-    return embeddings.tolist()
+    if not texts:
+        return []
+    result = genai.embed_content(
+        model="models/text-embedding-004",
+        content=texts
+    )
+    return result['embedding']
