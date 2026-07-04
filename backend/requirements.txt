@@ -8,4 +8,5 @@ scipy
 apscheduler
 python-dotenv
 google-generativeai
-psycopg2-binary==2.9.9
+pg8000
+scramp
